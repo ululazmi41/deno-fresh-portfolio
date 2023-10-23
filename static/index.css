@@ -1,0 +1,26 @@
+.link-white {
+  color: white;
+  transition: all 0.15s ease;
+}
+
+.link-white:hover {
+  color: #9ca3af;
+}
+
+.link-blue {
+  color: #267EAF;
+  transition: all 0.15s ease;
+}
+
+.link-blue:hover {
+  color: #26a0e2;
+}
+
+.link-blue-white {
+  color: #267EAF;
+  transition: all 0.15s ease;
+}
+
+.link-blue-white:hover {
+  color: #76acc9;
+}
