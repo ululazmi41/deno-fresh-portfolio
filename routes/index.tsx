@@ -1,6 +1,36 @@
 import { useSignal } from "@preact/signals";
 // import Counter from "../islands/Counter.tsx"; // TODO: remove
 
+enum BadgeColor {
+  blue,
+  green,
+}
+
+function Badge({ name, color }: { name: string, color?: BadgeColor | null }) {
+  const processColor = (color: BadgeColor): string => {
+    if (color === BadgeColor.blue) {
+      return "#2563eb";
+    } else if (color === BadgeColor.green) {
+      return "#16a34a";
+    }
+
+    return "#2563eb";
+  }
+  
+  return (
+    <div
+      class="text-sm px-2 py-1 rounded cursor-default"
+      style={{
+        "background": processColor(color ?? BadgeColor.blue),
+        "width": "max-content",
+        "color": "white",
+      }}
+    >
+      {name}
+    </div>
+  );
+}
+
 export default function Home() {
   const count = useSignal(3);
   return (
@@ -72,9 +102,11 @@ export default function Home() {
               </div>
               <div>
                 <p>Majoring in Software Engineering</p>
-                <p>
-                  Skills: Mobile App, Web App, Software Development Life Cyle
-                </p>
+                <div class="flex items-center gap-1">
+                  <Badge name="Mobile App" />
+                  <Badge name="Web App" />
+                  <Badge name="SDLC" />
+                </div>
               </div>
             </div>
           </div>
@@ -95,14 +127,18 @@ export default function Home() {
                 <p>
                   Learning Path completed:{" "}
                   <span class="font-bold link-blue">
-                    <a href="#">Multi-Platform App</a>
+                    <a href="https://www.dicoding.com/learningpaths/21">Multi-Platform App</a>
                   </span>{" "}
                   and{" "}
                   <span class="font-bold link-blue">
-                    <a href="#">Front-End Web</a>
+                    <a href="https://www.dicoding.com/learningpaths/22">Front-End Web</a>
                   </span>
                 </p>
-                <p>Skills: Mobile App, Web App, and Back-End Development</p>
+                <div class="flex items-center gap-1">
+                  <Badge name="Mobile App" />
+                  <Badge name="Web App" />
+                  <Badge name="Back-End" />
+                </div>
               </div>
             </div>
           </div>
@@ -122,7 +158,10 @@ export default function Home() {
                   Learning Path:{" "}
                   <span class="font-bold">Full-Stack Developer</span>
                 </p>
-                <p>Skills: Web and Back-End Development</p>
+                <div class="flex items-center gap-1">
+                  <Badge name="Web App" />
+                  <Badge name="Back-End" />
+                </div>
               </div>
             </div>
           </div>
@@ -139,7 +178,10 @@ export default function Home() {
                   Learning Path:{" "}
                   <span class="font-bold">Multi-Platfrom and Back-End</span>
                 </p>
-                <p>Skills: Mobile App and Back-End Development</p>
+                <div class="flex items-center gap-1">
+                  <Badge name="Multi-Platform" />
+                  <Badge name="Back-End" />
+                </div>
               </div>
             </div>
           </div>
@@ -149,7 +191,9 @@ export default function Home() {
             <div class="flex flex-col justify-center">
               <p class="text-md font-bold">Baparekraf Developer Day 2023</p>
               <p class="italic opacity-[0.6]">May 2023</p>
-              <p>Skills: Kotlin</p>
+              <div class="flex items-center gap-1">
+                <Badge name="Kotlin" color={BadgeColor.green} />
+              </div>
             </div>
           </div>
           {/* Baparegraf Developer Day 2022 */}
@@ -158,7 +202,9 @@ export default function Home() {
             <div class="flex flex-col justify-center">
               <p class="text-md font-bold">Baparekraf Developer Day 2022</p>
               <p class="italic opacity-[0.6]">Apr 2022</p>
-              <p>Skills: Front-End Web App</p>
+              <div class="flex items-center gap-1">
+                <Badge name="Front-End Web" />
+              </div>
             </div>
           </div>
           {/* Digitalent Scholarship */}
@@ -167,7 +213,9 @@ export default function Home() {
             <div class="flex flex-col justify-center">
               <p class="text-md font-bold">Digitalent Scholarship</p>
               <p class="italic opacity-[0.6]">Jul 2021 - Oct 2021</p>
-              <p>Skills: Junior Web Development</p>
+              <div class="flex items-center gap-1">
+                <Badge name="Junior Web Development" />
+              </div>
             </div>
           </div>
         </div>
@@ -187,13 +235,19 @@ export default function Home() {
                   Feb 2023 - Jul 2023 | <span class="font-bold">Intern</span>
                 </p>
               </div>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="Dart" color={BadgeColor.green} />
+                <Badge name="Typescript" color={BadgeColor.green} />
+                <Badge name="Javascript" color={BadgeColor.green} />
+                <Badge name="Flutter" />
+                <Badge name="Node.js" />
+                <Badge name="SQLite" />
+                <Badge name="JSON" />
+              </div>
               <div class="mt-2">
                 <p>
-                  <span class="font-bold">Tech stack</span>: Flutter, Node.js
-                </p>
-                <p>
-                  <span class="font-bold">Project</span>: Vehicle Condition
-                  Assessment (Android App)
+                  <span class="font-bold">Project</span>: Vehicle Condition Assessment (Android App)
                 </p>
               </div>
             </div>
@@ -226,14 +280,14 @@ export default function Home() {
                 <span class="font-bold">Thesis Project</span> on{" "}
                 <span class="font-bold">Politeknik Negeri Bengkalis</span>
               </p>
-              <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Dart, Typescript
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: Flutter, Next.js,
-                  Firebase
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="Dart" color={BadgeColor.green} />
+                <Badge name="Typescript" color={BadgeColor.green} />
+                <Badge name="Flutter" />
+                <Badge name="Next.js" />
+                <Badge name="Firebase" />
+                <Badge name="LaTeX" />
               </div>
             </div>
           </div>
@@ -256,15 +310,15 @@ export default function Home() {
                 <span class="font-bold">Android App Project</span> from{" "}
                 <span class="font-bold">PT. Lintasarta Duri</span>
               </p>
-              <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Dart, Typescript,
-                  Javascript
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: Flutter, Node.js,
-                  SQLite, Server API, JSON
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="Dart" color={BadgeColor.green} />
+                <Badge name="Typescript" color={BadgeColor.green} />
+                <Badge name="Javascript" color={BadgeColor.green} />
+                <Badge name="Flutter" />
+                <Badge name="Node.js" />
+                <Badge name="SQLite" />
+                <Badge name="JSON" />
               </div>
             </div>
           </div>
@@ -286,14 +340,12 @@ export default function Home() {
                 <span class="font-bold">Capstone Project</span> on{" "}
                 <span class="font-bold">SIB Kampus Merdeka with Dicoding</span>
               </p>
-              <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Dart
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: Flutter, Firebase,
-                  SQLite, JSON
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="Dart" color={BadgeColor.green} />
+                <Badge name="Flutter" />
+                <Badge name="SQLite" />
+                <Badge name="Firebase" />
               </div>
             </div>
           </div>
@@ -316,13 +368,16 @@ export default function Home() {
                 <span class="font-bold">Menjadi Flutter Developer Expert</span>
               </p>
               <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Dart
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: Flutter, SQLite,
-                  Firebase, JSON, CI CD, CodeMagic
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="Dart" color={BadgeColor.green} />
+                <Badge name="Flutter" />
+                <Badge name="SQLite" />
+                <Badge name="Firebase" />
+                <Badge name="JSON" />
+                <Badge name="CICD" />
+                <Badge name="CodeMagic" />
+              </div>
               </div>
             </div>
           </div>
@@ -346,15 +401,13 @@ export default function Home() {
                   Menjadi Front-End Web Developer Expert
                 </span>
               </p>
-              <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Dart, Typescript,
-                  Javascript
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: Flutter, Node.js,
-                  SQLite, Server API, JSON
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="HTML" color={BadgeColor.green} />
+                <Badge name="CSS" color={BadgeColor.green} />
+                <Badge name="Javascript" color={BadgeColor.green} />
+                <Badge name="Node.js" />
+                <Badge name="JSON" />
               </div>
             </div>
           </div>
@@ -378,13 +431,13 @@ export default function Home() {
                   Belajar Membuat Aplikasi Web dengan React
                 </span>
               </p>
-              <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Javascript
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: React.js, Node.js
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="CSS" color={BadgeColor.green} />
+                <Badge name="Javascript" color={BadgeColor.green} />
+                <Badge name="React.js" />
+                <Badge name="Node.js" />
+                <Badge name="JSON" />
               </div>
             </div>
           </div>
@@ -408,13 +461,11 @@ export default function Home() {
                   Belajar Membuat Aplikasi Back-End untuk Pemula
                 </span>
               </p>
-              <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Javascript
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: Node.js
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="Javascript" color={BadgeColor.green} />
+                <Badge name="Node.js" />
+                <Badge name="JSON" />
               </div>
             </div>
           </div>
@@ -438,13 +489,11 @@ export default function Home() {
                   Belajar Membuat Aplikasi Android untuk Pemula
                 </span>
               </p>
-              <div class="mt-2">
-                <p>
-                  <span class="font-bold">Language</span>: Kotlin, XML
-                </p>
-                <p>
-                  <span class="font-bold">Tech Stack</span>: Android Studio
-                </p>
+              <div class="flex items-center gap-1 mt-1">
+                <p class="font-bold">Tech Stack</p>
+                <Badge name="Kotlin" color={BadgeColor.green} />
+                <Badge name="XML" color={BadgeColor.green} />
+                <Badge name="Android Studio" />
               </div>
             </div>
           </div>
@@ -492,7 +541,8 @@ export default function Home() {
                 <a
                   class="link-blue-white"
                   style={{ "display": "block", "width": "max-content" }}
-                  href="#"
+                  href="https://www.dicoding.com/certificates/81P2G295QPOY"
+                  target="_blank"
                 >
                   <p>see certificate</p>
                 </a>
@@ -520,7 +570,8 @@ export default function Home() {
                 <a
                   class="link-blue-white"
                   style={{ "display": "block", "width": "max-content" }}
-                  href="#"
+                  href="https://www.dicoding.com/certificates/1RXY644Y1ZVM"
+                  target="_blank"
                 >
                   <p>see certificate</p>
                 </a>
@@ -548,7 +599,8 @@ export default function Home() {
                 <a
                   class="link-blue-white"
                   style={{ "display": "block", "width": "max-content" }}
-                  href="#"
+                  href="https://www.dicoding.com/certificates/MRZMKO5QNPYQ"
+                  target="_blank"
                 >
                   <p>see certificate</p>
                 </a>
@@ -576,7 +628,8 @@ export default function Home() {
                 <a
                   class="link-blue-white"
                   style={{ "display": "block", "width": "max-content" }}
-                  href="#"
+                  href="https://www.dicoding.com/certificates/GRX524502X0M"
+                  target="_blank"
                 >
                   <p>see certificate</p>
                 </a>
@@ -604,7 +657,8 @@ export default function Home() {
                 <a
                   class="link-blue-white"
                   style={{ "display": "block", "width": "max-content" }}
-                  href="#"
+                  href="https://www.dicoding.com/certificates/07Z6R527JPQR"
+                  target="_blank"
                 >
                   <p>see certificate</p>
                 </a>
@@ -632,7 +686,8 @@ export default function Home() {
                 <a
                   class="link-blue-white"
                   style={{ "display": "block", "width": "max-content" }}
-                  href="#"
+                  href="https://www.dicoding.com/certificates/L4PQ3GDV4PO1"
+                  target="_blank"
                 >
                   <p>see certificate</p>
                 </a>
@@ -674,7 +729,10 @@ export default function Home() {
               >
                 LinkedIn
               </span>{" "}
-              : <a href="https://www.linkedin.com/in/ulul-azmi-03a809215/">Ulul Azmi</a>
+              :{" "}
+              <a href="https://www.linkedin.com/in/ulul-azmi-03a809215/">
+                Ulul Azmi
+              </a>
             </p>
             <p>
               <span
